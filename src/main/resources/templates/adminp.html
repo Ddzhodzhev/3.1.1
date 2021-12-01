@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin page</title>
+</head>
+<body>
+<br>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>LastName</th>
+        <th>Age</th>
+        <th>Roles</th>
+    </tr>
+    <tr th:each="user : ${allUsers}">
+        <td>
+            <a th:href="@{/user/{id}(id=${user.getId()})}">
+                <button>[[${user.getId()}]]</button>
+            </a>
+        </td>
+        <td th:text="${user.getUsername()}"></td>
+        <td th:text="${user.getLastName()}"></td>
+        <td th:text="${user.getAge()}"></td>
+        <td th:text="${user.getRoles()}"></td>
+        <td>
+            <a th:href="@{/admin/{id}/edit(id=${user.getId()})}">
+                <button>Edit user</button>
+            </a>
+        </td>
+        <td>
+            <form th:method="DELETE" th:action="@{/admin/delete/{id}(id=${user.getId()})}">
+                <input type="submit" value="Delete"/>
+            </form>
+        </td>
+    </tr>
+</table>
+<br>
+<a href="/admin/new">
+    <button>Create new user</button>
+</a>
+<br><br>
+<a href="/user">
+    <button>My userpage</button>
+</a>
+<br><br>
+<a th:href="@{/logout}"><button>Logout</button></a>
+</a>
+</body>
+</html>
